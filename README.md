@@ -79,3 +79,8 @@ add the key to the ssh-agent
 user@system:~$ ssh-add ~/.ssh/id_ed25519
 Identity added: /home/user/.ssh/id_ed25519 (email@myaddress.com)
 ```
+
+```
+a542@SJH2-Ubuntu:~$ cat ~/.ssh/id_ed25519.pub
+ssh-ed25519 -deleted- email@myaddress.com
+```
