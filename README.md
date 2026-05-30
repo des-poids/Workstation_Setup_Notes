@@ -174,3 +174,17 @@ ssh-ed25519 -deleted- email@myaddress.com
 [Add SSH to github account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 
 [Testing your SSH connection](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection)
+
+# Project templates
+## Fast API template
+```
+app/
+  api/
+  services/
+  schemas/
+  db/
+  core/
+tests/
+.env.example
+pyproject.toml (if using poetry)
+```
