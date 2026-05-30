@@ -11,7 +11,7 @@ I'm using:
   - 2.2 GHz 6-Core Intel Core i7
   - Sequoia 15.7.7
 
-I'm running my virtual environment using
+My virtual environment
 - Professional Version 12.2.5 (20904517)
 
 In order to get around the hard drive space limitation on this computer I'm running everything on a 1TB LaCie solid state external hard drive.
@@ -24,6 +24,96 @@ ubuntu 26.04 desktop
 
 Note: I like my background to be a solid color rather than some design which distracts from my work.  Ubuntu no longer supports this through a GUI interface but you can set it up via bash terminal ....
 
+### Initial system update
+```
+sudo apt update
+sudo apt upgrade
+sudo apt install build-essential dkms
+```
+### Install git
+`sudo apt install git`
+
+### Install vscode
+```
+wget -O code-latest.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
+sudo apt install ./code-latest.deb
+```
+Install extensions
+- Python
+- Pylance
+- Docker
+- GitLens
+- REST Client (for API testing)
+
+### Install ruby
+```
+sudo apt install gcc make libssl-dev libreadline-dev zlib1g-dev libsqlite3-dev libyaml-de
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+~/.rbenv/bin/rbenv init
+```
+
+refresh the terminal before proceeding `~/.bashrc`
+```
+mkdir -p "$(rbenv root)"/plugins
+git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+```
+
+verify rbev installation 
+
+`rbenv -v`
+
+```
+rbenv install 3.4.6 --verbose` note it takes some time to run the ruby installation
+rbenv global 3.4.6
+```
+
+### Core developer tools
+`sudo apt install -y python3 python3-pip python3-venv curl build-essential`
+
+### Docker
+```
+sudo apt install -y ca-certificates curl gnupg lsb-release
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io
+```
+allow docker to be run without using sudo
+`sudo usermod -aG docker $USER`
+
+### Python tools (PEP 668 “externally-managed-environment” protection now in effect)
+pip can only install packages in a virtual environment.
+```
+sudo apt install pipx
+pipx ensurepath
+pipx install poetry
+pipx install uv
+```
+
+### Postgres client tools
+`sudo apt install -y postgresql-client`
+
+### Check installations
+Refresh the terminal
+`source ~/.bashrc`
+
+and run:
+```
+python3 --version
+pip --version
+docker --version
+git --version
+code --version
+```
+
+### To change ubuntu desktop to a solid color (no GUI support for this)
 1. Disable the current wallpaper image
 ```
 gsettings set org.gnome.desktop.background picture-uri ""
@@ -42,13 +132,9 @@ gsettings set org.gnome.desktop.background primary-color '#092230'
 for a little help picking colors:
 [google color picker](https://share.google/JAQIBlyElVjXcnYs7)
 
-## Core Tools
 
-- Python
-- Ruby
-- 
-
-## Github
+## Github - ssh key setup
+On the linux system:
 Setup a ssh key:
 
 ```
@@ -81,6 +167,10 @@ Identity added: /home/user/.ssh/id_ed25519 (email@myaddress.com)
 ```
 
 ```
-a542@SJH2-Ubuntu:~$ cat ~/.ssh/id_ed25519.pub
+user@system:~$ cat ~/.ssh/id_ed25519.pub
 ssh-ed25519 -deleted- email@myaddress.com
 ```
+
+[Add SSH to github account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
+[Testing your SSH connection](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection)
