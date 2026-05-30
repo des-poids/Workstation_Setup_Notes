@@ -177,6 +177,15 @@ ssh-ed25519 -deleted- email@myaddress.com
 
 # Project templates
 ## Fast API template
+In the project folder
+```
+python -m venv venv
+source ./bin/activate
+pip install fastapi uvicorn[standard] python-dotenv
+mkdir -p app/api app/services app/schemas app/db app/core tests
+touch app/main.py app/api/routes.py app/services/ai_service.py app/schemas/models.py app/db/database.py app/core/config.py
+```
+
 ```
 app/
   api/
